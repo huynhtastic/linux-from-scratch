@@ -118,3 +118,5 @@ chmod -v a+wt $LFS/sources
 ```
 
 That's enough to get me through using `chmod` for now! Time to keep reading LFS.
+
+If you want to learn more, including advanced techniques like using `find` to change permissions in bulk or handling symbolic links (symlinks), read more at https://linuxize.com/post/chmod-command-in-linux/ or read up on the [man page](https://www.man7.org/linux/man-pages/man1/chmod.1.html).
