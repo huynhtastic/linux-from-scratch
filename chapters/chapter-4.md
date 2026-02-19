@@ -2,6 +2,13 @@
 concepts_covered:
   - "[[standard-build-units]]"
 ---
+# Notes
+## 4.6. About the Test Suites
+A common issue for `binutils` and `gcc` is running out of pseudo-terminals (PTYs) which most likely means `devpts` FS set up correctly.
+
+Refer to https://www.linuxfromscratch.org/lfs/faq.html#no-ptys for more.
+
+Refer to https://www.linuxfromscratch.org/lfs/build-logs/13.0-rc1/ for expected test failures.
 # Command explanations
 ## 4.2
 ```bash

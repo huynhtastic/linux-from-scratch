@@ -21,3 +21,6 @@ https://www.linuxfromscratch.org/lfs/view/13.0-systemd-rc1/chapter02/hostreqs.ht
 | **Remove a package**                    | `sudo apt remove nvim`  | `sudo pacman -Rs nvim` |
 | **Search for a package**                | `apt search nvim`       | `pacman -Ss nvim`      |
 | **Clean cache**                         | `sudo apt clean`        | `sudo pacman -Sc`      |
+## 4.6 About the Test Suites
+https://www.linuxfromscratch.org/lfs/faq.html#no-ptys
+https://www.linuxfromscratch.org/lfs/build-logs/13.0-rc1/
