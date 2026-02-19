@@ -1,3 +1,8 @@
+---
+related_chapters:
+  - "[[chapter-3]]"
+---
+
 > Learning about `chmod` because it's such a common permission-related command, but the octal mappings used to scare me a lot. Time to face my fears.
 
 # Activity

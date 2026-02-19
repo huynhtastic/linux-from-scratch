@@ -11,7 +11,6 @@ Apart from a brief explanation of the problem being experienced, any request for
 
 ## 2.2 Host System Requirements
 https://www.linuxfromscratch.org/lfs/view/13.0-systemd-rc1/chapter02/hostreqs.html
-
 # Pacman
 | **Action**                              | **Linux Mint (apt)**    | **Arch (pacman)**      |
 | --------------------------------------- | ----------------------- | ---------------------- |
