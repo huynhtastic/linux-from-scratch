@@ -1,12 +1,24 @@
 # Linking
-Linking is the process that resolves references to dependencies and calculates the exact memory address for a reference that the compiler is asking for.
+Linking is the process that resolves references to dependencies and has 2 categories:
+- Static Linking
+- Dynamic Linking
+## Static Linking
+The process where the **static linker** bakes the external dependencies into the compiled binary. This results in a larger binary with some restrictions, but it ensures the binary has everything it needs to run.
 
-Linking is split into static and dynamic linking.
-## Static Linking (compile-time)
-The process of creating **tags** and writing to the **Procedure Linkage Table (PLT)**
-within the binary to tell the dynamic linker where to find dependencies.
-### Tags
-The instructions (think of it like a physical map) that tells there dynamic linker where to find these dependencies at run-time.
+This happens only at **compile time**.
+## Dynamic Linking
+The process of allowing the binary to dynamically resolve external dependencies in places outside of the binary.
+
+It involves creating **tags**, writing to the **Procedure Linkage Table (PLT)**, and finally creating the **Global Offset Table (GOT)** with the ultimate goal of being able to find and execute external dependencies.
+### Procedure Linkage Table (PLT)
+The table that the binary will reference to find the instructions needed "jump" to an external function to use it.
+It just references the **Global Offset Table (GOT)** which contain the actual "jump" instructions.
+### Global Offset Table (GOT)
+The table that the PLT references to point where in the host to be able to find the external dependencies.
+#### Tags
+The instructions (think of it like a physical map) that tells there dynamic linker where to find these dependencies at run-time. These are built by the **static linker** but used by the **dynamic linker**.
+
+They may be created but not always used as the linker could be told to look at other places first.
 
 There are 2 of tagging: `rpath` and `runpath`, tabled by Gemini:
 
@@ -15,12 +27,6 @@ There are 2 of tagging: `rpath` and `runpath`, tabled by Gemini:
 | **Priority**            | Highest (Overrides everything)                     | Lower (Checked after environment variables)                      |
 | **Flexibility**         | Rigid / Hard to debug                              | Flexible / Easier to test                                        |
 | **Dependency Upgrades** | Since hardcoded, requires a complete recompilation | Doesn't require recompilation and can essentially be hot-swapped |
-### Procedure Linkage Table (PLT)
-The reference that the binary will use to understand what it needs to do to "jump" to an external function.
-
-It is used when the code references an external dependency. It just references the **Global Offset Table (GOT)**.
-## Dynamic Linking (run-time)
-The process of finding and creating memory addresses for external dependencies.
 # Compilation & Execution Flow
 At run-time, the CPU will:
 1. See a reference to an external dependency
