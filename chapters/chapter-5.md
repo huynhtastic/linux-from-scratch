@@ -1,3 +1,7 @@
+---
+concepts_covered:
+  - "[[tar]]"
+---
 ## ii. Toolchain Technical Notes
 ### Terms
 - **The build**: the machine where we build programs, also referred to as the "host"
