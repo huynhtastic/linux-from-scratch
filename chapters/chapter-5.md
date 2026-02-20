@@ -39,11 +39,17 @@ Note: ccA and ccC are actually native compilers since they target their hosts.
 
 
 ## 5.2. Binutils-2.46.0 - Pass 1
+The tools used to manipulate object files and assembly code.
+Contains:
+- The Static Linker `ld`
+- The Assembler `as`: translates assembly to machine code
+- A bunch of other utilities
+
 ```bash
 # Configure is a script that gathers configuration info of the machine, like what tools are available and where they're located or CPU architecture
 ../configure --prefix=$LFS/tools \
 			 # --prefix: tells configure to install the tool in the $LFS/tools directory
-			 # --with-sysroot=$LFS: tell build system to look in #LFS for system libs for x-compile
+			 # --with-sysroot=$LFS: tell build system to look in $LFS for system libs for x-compile
              --with-sysroot=$LFS \
 			 # --target=$LFS_TGT: tell configure to x-compile since our $LFS_TGT var is different than`config.guess`
              --target=$LFS_TGT   \
@@ -57,4 +63,35 @@ Note: ccA and ccC are actually native compilers since they target their hosts.
              --enable-new-dtags  \
 			 # --enable-default-hash-style=gnu: disables the creation of the ELF hash table which is also created by default
              --enable-default-hash-style=gnu
+```
+## 5.3. GCC-15.2.0 - Pass 1
+Translates C/C++ files into assembly code. Calls Binutils to then finish the rest of the job.
+```bash
+../configure                  \
+    --target=$LFS_TGT         \
+    --prefix=$LFS/tools       \
+    --with-glibc-version=2.43 \
+    --with-sysroot=$LFS       \
+	# --with-newlib: ensure inhibit_libc is defined when building to prevent requiring libc
+    --with-newlib             \
+	# --without-headers: prevent header creation since we don't need it
+    --without-headers         \
+	# --enable-default-pie, --enable-default-ssp: hardening security features
+    --enable-default-pie      \
+    --enable-default-ssp      \
+    --disable-nls             \
+	# --disable-shared: bakes in external dependencies which also disables the creation of the PLT, GOT, and tags
+    --disable-shared          \
+	# --disable-multilib: prevents creation of 32-bit versions
+    --disable-multilib        \
+	# --disable-threads, --disable-libatomic, --disable-libgomp, --disable-libquadmath, --disable-libssp, --disable-libvtv, --disable-libstdcxx: prevents compiling unneeded features
+    --disable-threads         \
+    --disable-libatomic       \
+    --disable-libgomp         \
+    --disable-libquadmath     \
+    --disable-libssp          \
+    --disable-libvtv          \
+    --disable-libstdcxx       \
+	# --enable-languages=c,c++: only build C and C++ compilers
+    --enable-languages=c,c++
 ```
