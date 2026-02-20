@@ -53,7 +53,8 @@ Note: ccA and ccC are actually native compilers since they target their hosts.
              --enable-gprofng=no \
 			 # --disable-werror: continue building even if there are warnings from host compiler
              --disable-werror    \
-			 # --enable-new-dtags:
+			 # --enable-new-dtags: switch from using rpath to runpath, allowing us to tell LD (Linker/Dynamic) where to look for external deps.
              --enable-new-dtags  \
+			 # --enable-default-hash-style=gnu: disables the creation of the ELF hash table which is also created by default
              --enable-default-hash-style=gnu
 ```
