@@ -2,6 +2,7 @@
 concepts_covered:
   - "[[tar]]"
   - "[[compilation]]"
+  - "[[c-header-files]]"
 ---
 ## ii. Toolchain Technical Notes
 ### Terms
@@ -95,3 +96,7 @@ Translates C/C++ files into assembly code. Calls Binutils to then finish the res
 	# --enable-languages=c,c++: only build C and C++ compilers
     --enable-languages=c,c++
 ```
+
+## 5.4. Linux-6.18.10 API Headers
+See [[c-header-files]] .
+
