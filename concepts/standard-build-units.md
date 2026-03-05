@@ -22,3 +22,17 @@ Actual SBU: 30.07
 real    13m33.145s
 user    71m3.245s
 sys     2m46.226s
+
+## glibc pass 1
+Expected SBU: 1.4 (0m37.8588s)
+Actual SBU: 10.67 (4m48.715s)
+
+Make:
+real    3m40.709s
+user    15m44.949s
+sys     2m30.436s
+
+Make Install:
+real    1m8.006s
+user    1m13.962s
+sys     0m16.518s
