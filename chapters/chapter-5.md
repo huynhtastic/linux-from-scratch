@@ -127,3 +127,24 @@ sed '/RTLDLIST=/s@/usr@@g' -i $LFS/usr/bin/ldd
 # -i: in-place. Save changes to file, not just show in terminal.
 # $LFS/usr/bin/ldd: the target file path.
 ```
+
+Look at [[grep]]
+```bash
+# This command ensures we have sucessfully made these files.
+# It will look for:
+	# /mnt/lfs/usr/lib/crt1.o succeeded (ctr1.o: contains _start symbol, creating the stack and passes control to the C lib.)
+	# /mnt/lfs/usr/lib/crti.o succeeded (ctri.o: initialization code for global contructors that run before `main`.)
+	# /mnt/lfs/usr/lib/crtn.o succeeded (ctrn.o: finalization code for global destructors that run after `main`.)
+	
+grep -E -o "$LFS/lib.*/S?crt[1in].*succeeded" dummy.log
+
+# -E: enable extended regex
+# -o: only give the exact matching string, not the entire line
+```
+
+```bash
+# Makes sure the compiler is searching for the correct header files.
+grep -B3 "^ $LFS/usr/include" dummy.log
+
+# -B3: show the 3 lines BEFORE the match instead of just the match.
+```
