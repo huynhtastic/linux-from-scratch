@@ -36,3 +36,11 @@ Make Install:
 real    1m8.006s
 user    1m13.962s
 sys     0m16.518s
+
+## libstdc++ pass 1
+Expected SBU: 0.2 (5.4084s)
+Actual SBU: 1.12
+
+real    0m30.339s
+user    1m29.535s
+sys     0m7.895s

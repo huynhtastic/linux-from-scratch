@@ -148,3 +148,17 @@ grep -B3 "^ $LFS/usr/include" dummy.log
 
 # -B3: show the 3 lines BEFORE the match instead of just the match.
 ```
+
+## 5.6. Libstdc++ from GCC-15.2.0
+```bash
+../libstdc++-v3/configure      \
+    --host=$LFS_TGT            \
+    --build=$(../config.guess) \
+    --prefix=/usr              \
+    --disable-multilib         \
+    --disable-nls              \
+	# --disable-libstdcxx-pch: prevents installation of recompiled include files
+    --disable-libstdcxx-pch    \
+	# --with-gxx-include-dir=/tools/$LFS_TGT/include/c++/15.2.**0**: 
+    --with-gxx-include-dir=/tools/$LFS_TGT/include/c++/15.2.**0**
+```
