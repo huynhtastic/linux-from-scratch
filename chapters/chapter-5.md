@@ -100,3 +100,30 @@ Translates C/C++ files into assembly code. Calls Binutils to then finish the res
 ## 5.4. Linux-6.18.10 API Headers
 See [[c-header-files]] .
 
+## 5.5. Glibc-2.43
+[[standard-build-units#glibc pass 1]]
+```bash
+../configure                             \
+      --prefix=/usr                      \
+      --host=$LFS_TGT                    \
+      --build=$(../scripts/config.guess) \
+	  # --disable-nscd: don't build name service cache daemon (not used)
+      --disable-nscd                     \
+	  # --libc_cv_slibdir=/usr/lib: don't build at /lib64 (the default for 64-bit machines)
+      libc_cv_slibdir=/usr/lib           \
+	  # --enable-kernel=5.4: support for 5.4 or later kernels. Disables workarounds for older kernels.
+      --enable-kernel=5.4
+```
+
+Look at [[sed]]
+```bash
+sed '/RTLDLIST=/s@/usr@@g' -i $LFS/usr/bin/ldd
+
+# sed: stream editor
+# '/RTLDLIST=/': the **address**. "only look for lines that contain 'RTLDLIST='"
+# s: substitute command
+# @/usr@@: replace "/usr" with nothing. we normally would say `s/usr//`, but use @ as the delimiter because we are looking for '/usr'.
+# g: global. without this, sed would only replace the first instance of /usr on this line, just like the global flag for regex.
+# -i: in-place. Save changes to file, not just show in terminal.
+# $LFS/usr/bin/ldd: the target file path.
+```
