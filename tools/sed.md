@@ -3,11 +3,15 @@
 > A tool to help perform basic text transformations on input streams like files or pipes.
 
 The most common say use will be for text substitutions.
-
+## Basic Syntax
 ```bash
-sed 's/find/replace/' file.txt
+sed 's/find/replace/' [file.txt]
 ```
 
+- s: The action flag. s is for `substitution` and d is for `deletion`
+- find: the text or pattern you are searching for to apply the action on
+- replace: used with the `s` flag, this replaces whatever is specified as `find`
+- file.txt: the path of the file to search through. If this is omitted, then it will apply the action to the output of a pipe.
 ## Address: line filtering
 By default, `sed` applies the **command** (`s/find/replace/`) to all lines. Use the **address** to specify which lines you want to apply the command to:
 
